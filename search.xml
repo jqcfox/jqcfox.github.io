@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>test</title>
+      <link href="/2026/07/17/test/"/>
+      <url>/2026/07/17/test/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-备份（确保你的改动已提交到Git）"><a href="#1-备份（确保你的改动已提交到Git）" class="headerlink" title="1. 备份（确保你的改动已提交到Git）"></a>1. 备份（确保你的改动已提交到Git）</h1> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add . &amp;&amp; git commit -m &quot;backup before update&quot;</span><br></pre></td></tr></table></figure><h1 id="2-清理缓存与旧文件"><a href="#2-清理缓存与旧文件" class="headerlink" title="2. 清理缓存与旧文件"></a>2. 清理缓存与旧文件</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br></pre></td></tr></table></figure><h1 id="3-重新生成并预览"><a href="#3-重新生成并预览" class="headerlink" title="3. 重新生成并预览"></a>3. 重新生成并预览</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g &amp;&amp; hexo s</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+  
+  
+</search>
