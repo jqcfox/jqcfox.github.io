@@ -20,15 +20,16 @@
 
   function seed () {
     stars.length = 0
-    const target = Math.max(110, Math.min(320, Math.round((W * H) / 8000)))
+    const target = Math.max(150, Math.min(450, Math.round((W * H) / 4500)))
     for (let i = 0; i < target; i++) {
       stars.push({
         x: Math.random() * W,
         y: Math.random() * H,
-        r: (0.4 + Math.random() * 1.6) * dpr,
+        r: (0.6 + Math.random() * 2.0) * dpr,
         phase: Math.random() * Math.PI * 2,
         speed: 0.008 + Math.random() * 0.025,
-        alpha: 0.45 + Math.random() * 0.55,
+        alpha: 0.65 + Math.random() * 0.35,
+        glow: Math.random() < 0.4,
         drift: (Math.random() - 0.5) * 0.04 * dpr
       })
     }
@@ -82,8 +83,23 @@
       s.x += s.drift
       if (s.x > W + 30) s.x = -30
       if (s.x < -30) s.x = W + 30
-      const twinkle = 0.45 + 0.55 * Math.sin(s.phase)
+      const twinkle = 0.55 + 0.45 * Math.sin(s.phase)
       const a = s.alpha * twinkle
+
+      // 光晕（叠加发光）
+      if (s.glow) {
+        const gr = s.r * 4
+        ctx.globalCompositeOperation = 'lighter'
+        const g = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, gr)
+        g.addColorStop(0, 'rgba(190,215,255,' + (a * 0.5).toFixed(3) + ')')
+        g.addColorStop(1, 'rgba(190,215,255,0)')
+        ctx.fillStyle = g
+        ctx.beginPath()
+        ctx.arc(s.x, s.y, gr, 0, Math.PI * 2)
+        ctx.fill()
+        ctx.globalCompositeOperation = 'source-over'
+      }
+
       ctx.beginPath()
       ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2)
       ctx.fillStyle = 'rgba(255,255,255,' + a.toFixed(3) + ')'
@@ -91,7 +107,7 @@
     }
 
     // 星星之间的星座连线
-    ctx.lineWidth = 0.5 * dpr
+    ctx.lineWidth = 0.6 * dpr
     for (i = 0; i < stars.length; i++) {
       const a = stars[i]
       for (j = i + 1; j < stars.length; j++) {
@@ -104,7 +120,7 @@
           ctx.beginPath()
           ctx.moveTo(a.x, a.y)
           ctx.lineTo(b.x, b.y)
-          ctx.strokeStyle = 'rgba(160,210,255,' + (0.22 * (1 - d / LINK_DIST)).toFixed(3) + ')'
+          ctx.strokeStyle = 'rgba(160,210,255,' + (0.3 * (1 - d / LINK_DIST)).toFixed(3) + ')'
           ctx.stroke()
         }
       }
